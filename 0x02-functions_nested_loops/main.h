@@ -1,22 +1,13 @@
-#include "_putchar" 
-
-/**
- * main - program that prints _putchar.
- *
- * Return: int
- */
-
-int main(void)
-{
-    int n = 0;
-    char str_hbt[9] = "_putchar";
-
-    while (n < 9)
-    {
-        _putchar(str_hbt[n]);
-        n += 1;
-    }
-    _putchar('\n');
-    return (0);
-}
-
+int _putchar(char c);
+void print_alphabet(void);
+void print_alphabet_x10(void);
+int _islower(int c);
+int _isalpha(int c);
+int print_sign(int n);
+int _abs(int);
+int print_last_digit(int);
+void jack_bauer(void);
+void times_table(void);
+int add(int, int);
+void print_to_98(int n);
+void print_times_table(int n);
