@@ -1,21 +1,24 @@
-#include <main.h> 
+#include "main.h"
 
 /**
- * main - program that prints _putchar.
+ * main - check the code for ALX School students.
  *
- * Return: int
+ * Program that prints _putchar, followed by a new line
+ *
+ * Return: always 0 (success)
  */
 
 int main(void)
 {
-    int n = 0;
-    char str_hbt[9] = "_putchar";
+    char s[] = "_putchar";
+    int i = 0;
 
-    while (n < 9)
+    while (s[i] != '\0')
     {
-        _putchar(str_hbt[n]);
-        n += 1;
+        _putchar(s[i]);
+        i++;
     }
-    _putchar('\n');
+    _putchar(10);
+
     return (0);
 }
