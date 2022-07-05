@@ -12,7 +12,7 @@ int n = 0;
 while (n < 8)
 {
 _putchar(string[n]);
- ++n;
+++n;
 }
 
 _putchar(10);
