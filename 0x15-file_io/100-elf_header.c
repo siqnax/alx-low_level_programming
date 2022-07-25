@@ -1,44 +1,34 @@
-#include <stdio.h>
-#include <elf.h>
+#include "main.h"
 
 /**
- * get_type - determine file type
- * @ehdr: pointer to struct of ELF header features
- */
-void get_type(Elf64_Ehdr *ehdr)
-{
-	printf("%-35s", "Type:");
-	switch (ehdr->e_type)
-	{
-	case ET_NONE:
-		printf("NONE (Unknown type)\n");
-		break;
-	case ET_REL:
-		printf("REL (Relocatable file)\n");
-		break;
-	case ET_EXEC:
-		printf("EXEC (Executable file)\n");
-		break;
-	case ET_DYN:
-		printf("DYN (Shared object file)\n");
-		break;
-	case ET_CORE:
-		printf("CORE (Core file)\n");
-		break;
-	}
-}
-
-
-
-/**
- * main - entry point for program to get header of ELF file
- * @argc: arg of count
- * @argv: arg of array
+ * append_text_to_file - Appends text at the end of a file.
+ * @filename: A pointer to the name of the file.
+ * @text_content: The string to add to the end of the file.
  *
- * Return: 1 on success, error code on failure
+ * Return: If the function fails or filename is NULL - -1.
+ *         If the file does not exist the user lacks write permissions - -1.
+ *         Otherwise - 1.
  */
-int main(int argc, char *argv[])
+int append_text_to_file(const char *filename, char *text_content)
 {
-	printf("argc:%d, argv:%p\n", argc, (void *)*argv);
+	int o, w, len = 0;
+
+	if (filename == NULL)
+		return (-1);
+
+	if (text_content != NULL)
+	{
+		for (len = 0; text_content[len];)
+			len++;
+	}
+
+	o = open(filename, O_WRONLY | O_APPEND);
+	w = write(o, text_content, len);
+
+	if (o == -1 || w == -1)
+		return (-1);
+
+	close(o);
+
 	return (1);
 }
