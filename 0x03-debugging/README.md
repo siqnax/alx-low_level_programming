@@ -62,7 +62,7 @@ You are not coding the solution / function, you’re just testing it! However, y
 * You only need to upload `0-main.c` and `holberton.h` for this task. We will provide our own `positive_or_negative()` function.
 * You are not allowed to add or remove lines of code, you may change only **one** line in this task.
 
-**Solution:** [0-main.c](https://github.com/monoprosito/holbertonschool-low_level_programming/blob/master/0x03-debugging/0-main.c), [holberton.h](https://github.com/siqnax/alx-low_level_programming/blob/master/0x03-debugging/holberton.h)
+**Solution:** [0-main.c](https://github.com/siqnax/alx-low_level_programming/blob/master/0x03-debugging/0-main.c), [holberton.h](https://github.com/siqnax/alx-low_level_programming/blob/master/0x03-debugging/main.h)
 
 ```
 $ amonkeyprogrammer@ubuntu:/debugging$ gcc -Wall -pedantic -Werror -Wextra positive_or_negative.c 0-main.c -o 0-main
@@ -203,7 +203,7 @@ Fix the code in `2-largest_number.c` so that it correctly prints out the largest
 
 * Line count will not be checked for this task.
 
-**Solution:** [2-largest_number.c](https://github.com/siqnax/alx-low_level_programming/blob/master/0x00-hello_world/0-preprocessor), [holberton.h](https://github.com/monoprosito/holbertonschool-low_level_programming/blob/master/0x03-debugging/holberton.h)
+**Solution:** [2-largest_number.c](https://github.com/siqnax/alx-low_level_programming/blob/master/0x00-hello_world/0-preprocessor), [holberton.h](https://github.com/siqnax/alx-low_level_programming/blob/master/0x03-debugging/holberton.h)
 
 ## Leap year
 
@@ -370,4 +370,4 @@ Fix the `print_remaining_days()` function so that the output works correctly for
 * You can assume that all test cases have valid months (i.e. the value of `month` will never be less than `1` or greater than `12`) and valid days (i.e. the value of `day` will never be less than `1` or greater than `31`).
 * You can assume that all test cases have valid month/day combinations (i.e. there will never be a June 31st or November 31st, etc.), but not all month/day/year combinations are valid (i.e. February 29, 1991 or February 29, 2427).
 
-**Solution:** [3-print_remaining_days.c](https://github.com/siqnax/alx-low_level_programming/blob/master/0x03-debugging/3-print_remaining_days.c), [holberton.h](https://github.com/siqnax/alx-low_level_programming/blob/master/0x03-debugging/holberton.h)
+**Solution:** [3-print_remaining_days.c](https://github.com/siqnax/alx-low_level_programming/blob/master/0x03-debugging/3-print_remaining_days.c), [holberton.h](https://github.com/siqnax/alx-low_level_programming/blob/master/0x03-debugging/main.h)
