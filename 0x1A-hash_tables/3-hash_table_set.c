@@ -1,90 +1,54 @@
 #include "hash_tables.h"
 
 /**
- * hash_table_set - adds an element to the hash table
- * @ht: hash table to be updated
- * @key: The key
- * @value: The key's value
- * Description: A key and value is set to a particular
- *  index on the HT, if collision, the element will be set
- *  to the beginning of the list and the previous element to next.
+ * hash_table_set - Add or update an element in a hash table.
+ * @ht: A pointer to the hash table.
+ * @key: The key to add - cannot be an empty string.
+ * @value: The value associated with key.
  *
- * Return: 1 if succeeded, 0 otherwise
+ * Return: Upon failure - 0.
+ *         Otherwise - 1.
  */
 
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	unsigned long int index, size;
-	hash_node_t *new_key, **ht_array;
-	char *str;
-	const char *ch;
+	hash_node_t *new;
+	char *value_copy;
+	unsigned long int index, i;
 
-	/* Check if hash table is valid */
-	if (ht == NULL)
-	{
+	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
 		return (0);
-	}
-	ht_array = ht->array;
-	/* Create new key */
-	new_key = create_key(key, value);
-	if (new_key == NULL)
-	{
+
+	value_copy = strdup(value);
+	if (value_copy == NULL)
 		return (0);
-	}
-	/* Generate index for the element */
-	size = ht->size;
-	index = key_index((unsigned char *)key, size);
-	str = strdup(value);
-	/* Set new key to index position on hash table */
-	if (ht_array[index] == NULL)
+
+	index = key_index((const unsigned char *)key, ht->size);
+	for (i = index; ht->array[i]; i++)
 	{
-		ht_array[index] = new_key;
-		free(str);
-	}
-	else
-	{
-		ch = (const char *)ht_array[index]->key;
-		if (strcmp(ch, key) == 0)
-		{ /* Update the value if key already exist*/
-			ht_array[index]->value = str;
+		if (strcmp(ht->array[i]->key, key) == 0)
+		{
+			free(ht->array[i]->value);
+			ht->array[i]->value = value_copy;
 			return (1);
 		}
-		new_key->next = ht_array[index];
-		ht_array[index] = new_key;
-		free(str);
 	}
-	return (1);
-}
 
-
-/**
- * create_key - create a new key with value
- * @key: The key
- * @value: The key's value
- * Description: Create a new key with the value assign from a duplicate
- *  then return the created key/value
- * Return: a pointer to the key if successful or NULL if not
- */
-
-hash_node_t *create_key(const char *key, const char *value)
-{
-	hash_node_t *element;
-	char *ele = strdup(key);
-	char *str = strdup(value);
-
-	/* Create the new element */
-	element = malloc(sizeof(hash_node_t));
-
-	/* Check if element is created successfully */
-	if (element == NULL)
+	new = malloc(sizeof(hash_node_t));
+	if (new == NULL)
 	{
-		return (NULL);
+		free(value_copy);
+		return (0);
 	}
+	new->key = strdup(key);
+	if (new->key == NULL)
+	{
+		free(new);
+		return (0);
+	}
+	new->value = value_copy;
+	new->next = ht->array[index];
+	ht->array[index] = new;
 
-	/* Assign key and value to the new element */
-	element->key = ele;
-	element->value = str;
-	element->next = NULL;
-
-	return (element);
+	return (1);
 }
