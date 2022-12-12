@@ -1,51 +1,39 @@
-#include "hash_tables.h"
+#include "./hash_tables.h"
 
 /**
- * hash_table_print - print the hash table content
- * @ht: The hash table
- * Description: Print out each content of the table
- *  and also navigate to check collisions and print it
+ * hash_table_print - Prints a hash table.
+ * @ht: A pointer to the hash table to print.
  *
- * Return: Nothing
+ * Description: Key/value pairs are printed in the order
+ *              they appear in the array of the hash table.
  */
-
 void hash_table_print(const hash_table_t *ht)
 {
-	hash_node_t *current;
-	hash_node_t *temp;
-	unsigned long int i, size, first = 1;
+	hash_node_t *node;
+	unsigned long int i;
+	unsigned char comma_flag = 0;
 
-	/* Check if ht is valid */
-	if (ht != NULL)
+	if (ht == NULL)
+		return;
+
+	printf("{");
+	for (i = 0; i < ht->size; i++)
 	{
-		size = ht->size;
-		printf("{");
-		for (i = 0; i < size; i++)
+		if (ht->array[i] != NULL)
 		{
-			current = ht->array[i];
-			if (current != NULL)
+			if (comma_flag == 1)
+				printf(", ");
+
+			node = ht->array[i];
+			while (node != NULL)
 			{
-				if (first)
-				{
-					printf("'%s': '%s'", current->key, current->value);
-					first = 0;
-				}
-				else
-				{
-					printf(", '%s': '%s'", current->key, current->value);
-				}
-				/* Print collisions */
-				if (current->next != NULL)
-				{
-					temp = current->next;
-					while (temp != NULL)
-					{
-						printf(", '%s': '%s'", temp->key, temp->value);
-						temp = temp->next;
-					}
-				}
+				printf("'%s': '%s'", node->key, node->value);
+				node = node->next;
+				if (node != NULL)
+					printf(", ");
 			}
+			comma_flag = 1;
 		}
-		printf("}\n");
 	}
+	printf("}\n");
 }
